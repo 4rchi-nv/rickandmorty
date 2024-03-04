@@ -2,32 +2,34 @@ import React, { useEffect, useState } from "react";
 
 export const CharacterPage = ({ match }) => {
     const [character, setCharacter] = useState(null);
+    const { id } = match.params;
 
     useEffect(() => {
-        // Fetch the individual character data based on the ID from the API
         const fetchCharacter = async () => {
-            const characterId = match.params.id; // Extract character ID from the URL params
-            const api = `https://rickandmortyapi.com/api/character/${characterId}`;
             try {
-                const response = await fetch(api);
-                const responseData = await response.json();
-                setCharacter(responseData); 
+                const response = await fetch(`https://rickandmortyapi.com/api/character/${id}`);
+                const data = await response.json();
+                setCharacter(data);
             } catch (error) {
                 console.error('Error fetching character data:', error);
             }
-        }
+        };
 
-        fetchCharacter(); 
-    }, [match.params.id]);
+        fetchCharacter();
+    }, [id]);
 
     return (
         <div>
-            {character && (
+            {character ? (
                 <div>
                     <h2>{character.name}</h2>
                     <img src={character.image} alt={character.name} />
-                    {/* Display other character details as needed */}
+                    <p>{character.status}</p>
+                    <p>{character.species}</p>
+                    {/* Add more details as needed */}
                 </div>
+            ) : (
+                <p>Loading...</p>
             )}
         </div>
     );
