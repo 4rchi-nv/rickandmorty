@@ -13,7 +13,7 @@ export const CharacterList = () => {
         } catch (error) {
             console.error('Error fetching character data:', error);
         }
-    }
+    };
 
     useEffect(() => {
         fetchCharacterData(currentPage); 
