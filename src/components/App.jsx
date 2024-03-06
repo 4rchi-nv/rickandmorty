@@ -1,20 +1,15 @@
 import React from "react";
 import { CharacterList } from "./CharacterList";
 import { CharacterPage } from "./CharacterPage";
-
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export const App = () => {
     return (
         <BrowserRouter>
-            <Switch>
-                <Route exact path="/">
-                    <CharacterList />
-                </Route>
-                <Route path="/character/:id">
-                    <CharacterPage />
-                </Route>
-            </Switch>
+            <Routes>
+                <Route path="/" element={<CharacterList />} />
+                <Route path="/character/:id" element={<CharacterPage />} />
+            </Routes>
         </BrowserRouter>
     );
 }

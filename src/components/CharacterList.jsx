@@ -9,6 +9,7 @@ export const CharacterList = () => {
         try {
             const response = await fetch(api);
             const responseData = await response.json();
+            console.log(responseData.results);
             setCharacterData(responseData.results); 
         } catch (error) {
             console.error('Error fetching character data:', error);
@@ -39,7 +40,7 @@ export const CharacterList = () => {
                 <ul role="list" className="grid gap-x-8 gap-y-12 sm:grid-cols-2 sm:gap-y-8 xl:col-span-2">
                     {characterData.map(character => (
                         <li key={character.id}>
-                            <a href="" className="flex items-center gap-x-6 rounded-lg border-4 border-cyan-100 p-2">
+                            <a href={`/character/${character.id}`} className="flex items-center gap-x-6 rounded-lg border-4 border-cyan-100 p-2 hover:-translate-y-1 hover:scale-105 duration-300">
                                 <img className="h-16 w-16 rounded-full" src={character.image} alt="" />
                                 <div>
                                     <h3 className="text-base font-semibold leading-7 tracking-tight text-zinc-100">{character.name}</h3>
